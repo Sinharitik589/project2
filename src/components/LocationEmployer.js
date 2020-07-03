@@ -78,13 +78,13 @@
 // 	const handleCity = (event) => {
 //     setCity(event.target.value);
 // 	};
-	
+
 //   return (
 //     <div>
 // 			{/* For Continents */}
 //       {/* <FormControl className={classes.margin}> */}
 //         <label htmlFor="Continent">
-//           Continent: 
+//           Continent:
 //           <select
 //             id="select-continent"
 //             value={continent}
@@ -99,7 +99,7 @@
 //         </label>
 //       {/* </FormControl> */}
 //       <label htmlFor="Country">
-//           Country:  
+//           Country:
 //           <select
 //             id="select-country"
 //             value={country}
@@ -125,7 +125,7 @@
 //           <MenuItem value="">
 //             <em>Select Country</em>
 //           </MenuItem>
-					
+
 // 					{countryData[`${continent}`].map((item) => (
 // 						<MenuItem value={item}>{item}</MenuItem>
 // 					))}
@@ -167,7 +167,11 @@ export default function LocationSelect() {
     return z;
   };
   return (
-    <div>
+    <div
+      onClick={(e) => {
+        e.preventDefault();
+      }}
+    >
       <div className="select_country_header">
         Select Locations
         <span
@@ -182,7 +186,12 @@ export default function LocationSelect() {
             }
           }}
         >
-          <button id="select_continent_button" onClick={(e) => e.preventDefault()}>Expand</button>
+          <button
+            id="select_continent_button"
+            onClick={(e) => e.preventDefault()}
+          >
+            Expand
+          </button>
         </span>
       </div>
       <div id="select_continent" className="continents">
