@@ -72,7 +72,7 @@ const Accordion = (props) => {
           onClick={() => {
             $(`#${x}`).toggle(400);
             var c = document.getElementById(`b${x}`);
-            if (c.innerHTML == "Expand") {
+            if (c.innerHTML === "Expand") {
               c.innerHTML = "Close";
             } else {
               c.innerHTML = "Expand";
