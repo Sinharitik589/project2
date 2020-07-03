@@ -9,28 +9,28 @@ const Form = () => {
   const [add_openings, setOpenings] = useState([]);
 
   useEffect(() => {
-    // var inputOpening = document.getElementById("add_openings");
-    // inputOpening.addEventListener("keyup", (event) => {
-    // if (event.keyCode === 13) {
-    //     event.preventDefault();
+    var inputOpening = document.getElementById("add_openings");
+    inputOpening.addEventListener("keyup", (event) => {
+    if (event.keyCode === 13) {
+        event.preventDefault();
 
-    //     let array = add_openings;
-    //     array.push(event.target.value);
-    //     setOpenings(array);
-    //     event.target.value = "";
-    // }
-    // });
-    // var inputTechstack = document.getElementById("add_techstack");
-    // inputTechstack.addEventListener("keyup", (event) => {
-    // if (event.keyCode === 13) {
-    //     event.preventDefault();
+        let array = add_openings;
+        array.push(event.target.value);
+        setOpenings(array);
+        event.target.value = "";
+    }
+    });
+    var inputTechstack = document.getElementById("add_techstack");
+    inputTechstack.addEventListener("keyup", (event) => {
+    if (event.keyCode === 13) {
+        event.preventDefault();
 
-    //     let array = add_techStack;
-    //     array.push(event.target.value);
-    //     setTechStack(array);
-    //     event.target.value = "";
-    // }
-    // });
+        let array = add_techStack;
+        array.push(event.target.value);
+        setTechStack(array);
+        event.target.value = "";
+    }
+    });
     var inputTag = document.getElementById("add_tag");
     inputTag.addEventListener("keyup", (event) => {
       if (event.keyCode === 13) {

@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import LocationSelect from "./LocationEmployer";
 import Dialog from "./Dialog";
 import $ from "jquery";
@@ -10,6 +10,11 @@ class Form extends Component {
   };
 
   componentDidMount() {
+
+    $('#add_tag').hide();
+    $('#add_techstack').hide();
+    $('#add_openings').hide();
+
     var inputOpening = document.getElementById("add_openings");
     inputOpening.addEventListener("keyup", (event) => {
       if (event.keyCode === 13) {
@@ -19,6 +24,8 @@ class Form extends Component {
         array.push(event.target.value);
         this.setState({ add_openings: array });
         event.target.value = "";
+        $('#add_openings').hide();
+        $('#add-openings-button').show();
       }
     });
     var inputTechstack = document.getElementById("add_techstack");
@@ -30,6 +37,8 @@ class Form extends Component {
         array.push(event.target.value);
         this.setState({ add_techStack: array });
         event.target.value = "";
+        $('#add_techstack').hide();
+        $('#add-techstack-button').show();
       }
     });
     var inputTag = document.getElementById("add_tag");
@@ -41,8 +50,27 @@ class Form extends Component {
         array.push(event.target.value);
         this.setState({ add_tag: array });
         event.target.value = "";
+        $('#add_tag').hide();
+        $('#add-tag-button').show();
       }
     });
+
+    // TO Toggle all Add buttons and input Field
+    $('#add-tag-button').click(() => {
+      $('#add-tag-button').hide();
+      $('#add_tag').show();
+    })
+
+    $('#add-techstack-button').click(() => {
+      $('#add-techstack-button').hide();
+      $('#add_techstack').show();
+    })
+
+    $('#add-openings-button').click(() => {
+      $('#add-openings-button').hide();
+      $('#add_openings').show();
+    })
+
   }
 
   dialogOpen = () => {
@@ -129,7 +157,7 @@ class Form extends Component {
   }
   render() {
     return (
-      <div class="container">
+      <div class="container" onClick={e => e.preventDefault()}>
         <h2 className="text-center">Company Registration</h2>
         <form className="form-horizontal" action="/action_page.php">
           <div className="form-group">
@@ -290,11 +318,8 @@ class Form extends Component {
                   Final-Services
                 </div>
                 <div style={{ display: "flex" }}>{this.addTagChip()}</div>
-                <input
-                  id="add_tag"
-                  placeholder="Add tag"
-                  className="input_chip"
-                />
+                <input id="add_tag" placeholder="Add tag" className="input_chip" />
+                <button id="add-tag-button" class="btn btn-primary active add-button"><b>+</b> Add New</button>
               </div>
             </div>
           </div>
@@ -340,6 +365,7 @@ class Form extends Component {
                   placeholder="Add techstack"
                   className="input_chip"
                 />
+                <button id="add-techstack-button" class="btn btn-primary active add-button"><b>+</b> Add New</button>
               </div>
             </div>
           </div>
@@ -386,6 +412,7 @@ class Form extends Component {
                   placeholder="Add Openings"
                   className="input_chip"
                 />
+                <button id="add-openings-button" class="btn btn-primary active add-button"><b>+</b> Add New</button>
               </div>
             </div>
           </div>
