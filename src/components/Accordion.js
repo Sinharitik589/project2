@@ -23,6 +23,7 @@ const Accordion = (props) => {
         <div
           className="schip"
           onClick={(e) => {
+            e.preventDefault();
             const { id } = e.target;
             $(`#${id}`).toggleClass("chip_change");
           }}
@@ -33,9 +34,9 @@ const Accordion = (props) => {
       );
     });
     z.push(
-      <div style={{ display: "flex", marginLeft: 10 }}>
+      <div>
+        <input type="checkbox" onClick={(e) => e.preventDefault()} />
         <label style={{ color: "black" }}> Remote</label>
-        <input type="checkbox" />
       </div>
     );
     return z;

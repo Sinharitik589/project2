@@ -201,7 +201,7 @@ select:focus {
 
 .continents {
   padding: 2%;
-  margin: 0 20% 20px 20%;
+  margin-right: 30%;
   display: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   flex-wrap: wrap;
@@ -261,7 +261,7 @@ select:focus {
   font-size: larger;
   position: relative;
   color: black;
-  margin: 0 20% 0 20%;
+  margin-right: 30%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -279,21 +279,4 @@ select:focus {
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   padding: 10px;
-}
-
-::-webkit-input-placeholder {
-  /* Edge */
-  color: gray;
-  text-align: center;
-}
-
-:-ms-input-placeholder {
-  /* Internet Explorer */
-  color: gray;
-  text-align: center;
-}
-
-::placeholder {
-  color: gray;
-  text-align: center;
 }

@@ -136,7 +136,7 @@ class Form extends Component {
             <label className="control-label col-sm-2" for="companyName">
               Company
             </label>
-            <div className="col-sm-10">
+            <div className="col-sm-3">
               <input
                 type="text"
                 className="form-control"
@@ -150,7 +150,7 @@ class Form extends Component {
             <label className="control-label col-sm-2" for="companyLogo">
               Logo
             </label>
-            <div className="col-sm-10">
+            <div className="col-sm-3">
               <input
                 type="text"
                 className="form-control"
@@ -164,7 +164,7 @@ class Form extends Component {
             <label className="control-label col-sm-2" for="assignment">
               No. of Assignments
             </label>
-            <div className="col-sm-10">
+            <div className="col-sm-3">
               <input
                 type="number"
                 className="form-control"
@@ -178,7 +178,7 @@ class Form extends Component {
             <label className="control-label col-sm-2" for="opening">
               No. of opening
             </label>
-            <div className="col-sm-8">
+            <div className="col-sm-3">
               <input
                 type="number"
                 className="form-control"
@@ -201,7 +201,7 @@ class Form extends Component {
             <label className="control-label col-sm-2" for="companyDesc">
               Company Description
             </label>
-            <div className="col-sm-10">
+            <div className="col-sm-5">
               <textarea
                 className="form-control"
                 id="companyDesc"
@@ -214,10 +214,10 @@ class Form extends Component {
           {/* Tags */}
 
           <div className="form-group">
-            <label className="control-label col-sm-2" for="assignment">
-              Tags
-            </label>
-            <div className="col-sm-10">
+            <div className="col-sm-12">
+              <label className="control-label col-sm-2" for="assignment">
+                Tags
+              </label>
               <div className="chip_wrapper">
                 <div
                   onClick={(e) => {
@@ -299,7 +299,7 @@ class Form extends Component {
             </div>
           </div>
           <div className="form-group">
-            <div className="col-sm-10">
+            <div className="col-sm-12">
               <label className="control-label col-sm-2" for="assignment">
                 Tech Stack
               </label>
@@ -344,7 +344,7 @@ class Form extends Component {
             </div>
           </div>
           <div className="form-group">
-            <div className="col-sm-10">
+            <div className="col-sm-12">
               <label className="control-label col-sm-2" for="assignment">
                 Openings
               </label>
@@ -588,8 +588,14 @@ class Form extends Component {
           <div className="input_label"> Locations</div>
           <LocationSelect />
         </div> */}
-          <LocationSelect />
-          <br />
+          <div className="form-group">
+            <label className="control-label col-sm-2" for="assignment">
+              Location
+            </label>
+            <div className="col-sm-8">
+              <LocationSelect />
+            </div>
+          </div>
           <div className="form-group">
             <div className="col-sm-offset-2 col-sm-10">
               <button type="submit" className="btn btn-primary">
