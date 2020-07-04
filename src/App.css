@@ -99,35 +99,33 @@ textarea:focus {
 
 .city_chip {
   white-space: nowrap;
-  color: black;
-  border: 2px solid gray;
+  /* color: black; */
+  /* border: 2px solid gray; */
   font-size: 12px;
   padding: 2px;
   border-radius: 10px;
-  margin: 2px 3px;
+  margin: 2px 3px 3px 3px;
   align-items: center;
   display: flex;
   cursor: pointer;
 }
 .city_chip_change {
   white-space: nowrap;
-  color: black;
-  border: 2px solid gray;
+  /* color: black;
+  border: 2px solid gray; */
   font-size: 12px;
   padding: 2px;
   border-radius: 10px;
-  margin: 2px 3px;
+  margin: 2px 3px 3px 3px;
   align-items: center;
   display: flex;
   cursor: pointer;
-  background-color: #1a73e8;
+  /* background-color: #1a73e8; */
 }
 
-.chip_change {
+.new_chip_change {
   white-space: nowrap;
-  color: black;
-  background-color: #1a73e8;
-  border: 1px solid black;
+
   padding: 0 25px;
   height: 30px;
   font-size: 12px;
@@ -138,10 +136,9 @@ textarea:focus {
   display: flex;
   cursor: pointer;
 }
-.schip {
+.schip_new {
+  margin-left: 10px;
   white-space: nowrap;
-  color: black;
-  border: 2px solid #1a73e8;
   padding: 0 25px;
   height: 30px;
   font-size: 12px;
@@ -305,3 +302,10 @@ textarea:focus {
   color: #314b7f;
   background-color: #c8d3e9;
 }
+
+/* 
+if( $('#i_4').attr('disabled') ){
+  $('#i_4').removeAttr('disabled')
+} else {
+  $('#i_4').attr('disabled', true)
+} */

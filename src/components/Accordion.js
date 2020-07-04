@@ -36,12 +36,13 @@ const Accordion = (props) => {
     z.push(
       <span style={{ position: "absolute", right: 2 }}>
         <div
-          className="city_chip"
-          style={{ borderColor: "#1a73e8" }}
+          className="city_chip btn btn-outline-primary"
           onClick={(e) => {
             console.log("clicked");
             const { id } = e.target;
             $(`#${id}`).toggleClass("city_chip_change");
+            $(`#${id}`).toggleClass("btn-outline-primary").toggleClass("btn-primary");
+            
           }}
           id={`${id}`}
         >
