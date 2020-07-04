@@ -21,11 +21,11 @@ const Accordion = (props) => {
     z = array.map((value) => {
       return (
         <div
-          className="schip"
+          className="city_chip"
           onClick={(e) => {
-            e.preventDefault();
+            console.log("clicked");
             const { id } = e.target;
-            $(`#${id}`).toggleClass("chip_change");
+            $(`#${id}`).toggleClass("city_chip_change");
           }}
           id={`${value}`}
         >
@@ -34,10 +34,20 @@ const Accordion = (props) => {
       );
     });
     z.push(
-      <div>
-        <input type="checkbox" onClick={(e) => e.preventDefault()} />
-        <label style={{ color: "black" }}> Remote</label>
-      </div>
+      <span style={{ position: "absolute", right: 2 }}>
+        <div
+          className="city_chip"
+          style={{ borderColor: "#1a73e8" }}
+          onClick={(e) => {
+            console.log("clicked");
+            const { id } = e.target;
+            $(`#${id}`).toggleClass("city_chip_change");
+          }}
+          id={`${id}`}
+        >
+          Remote
+        </div>
+      </span>
     );
     return z;
   };
@@ -47,7 +57,7 @@ const Accordion = (props) => {
     z = array.map((value) => {
       return (
         <div className="city">
-          <div style={{ flex: 1 }}> {value}</div>
+          <div style={{ flex: 1, fontSize: 12, paddingLeft: 10 }}> {value}</div>
           <div className="city_wrapper">{renderCity(value)}</div>
         </div>
       );
@@ -70,17 +80,18 @@ const Accordion = (props) => {
         {props.id}
         <span
           className="expand"
-          onClick={() => {
+          id={`b${x}`}
+          onClick={(e) => {
             $(`#${x}`).toggle(400);
-            var c = document.getElementById(`b${x}`);
-            if (c.innerHTML === "Expand") {
-              c.innerHTML = "Close";
+            var c = document.getElementById(`${e.target.id}`);
+            if (c.innerHTML === "+") {
+              c.innerHTML = "-";
             } else {
-              c.innerHTML = "Expand";
+              c.innerHTML = "+";
             }
           }}
         >
-          <button id={`b${x}`}>Expand</button>
+          +
         </span>
       </div>
       <div className="accordion_elements" id={x}>

@@ -1,16 +1,62 @@
 import React, { Component, useState } from "react";
 import LocationSelect from "./LocationEmployer";
-import Dialog from "./Dialog";
+
 import $ from "jquery";
 class Form extends Component {
   state = {
     add_tag: [],
     add_techStack: [],
     add_openings: [],
+    tag: [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Deep Learning",
+      "Neural Networks",
+      "Fintech",
+      "Financial Services",
+      " Saas",
+      "E-Commerce",
+      "Edtech",
+      "Software as a Service",
+      "Logistics",
+      "Healthcare",
+      "Computer Vision",
+      "Ride hailing",
+      "Transportation",
+      "Food Delivery",
+      "Big Data",
+      "Data Analytics",
+      "Developer Tools",
+      "Nonprofit",
+      "Design",
+      "Cybersecurity",
+      "Data Security",
+      "Blockchain",
+      "Agritech",
+      "Supply Chain",
+    ],
+    techStack: ["AWS", "React", "Python"],
+    openings: [
+      "Software Development Internship",
+      "Full Stack Development",
+      "Supply Chain Intern",
+    ],
   };
 
   componentDidMount() {
-    var inputOpening = document.getElementById("add_openings");
+    var inputOpening = document.getElementById("add_techstack");
+    inputOpening.addEventListener("keyup", (event) => {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+
+        let array = this.state.add_techStack;
+        array.push(event.target.value);
+        this.setState({ add_techStack: array });
+        event.target.value = "";
+        $("#add_techstack,#tech_chip_wrapper").toggle();
+      }
+    });
+    var inputOpening = document.getElementById("add_opening");
     inputOpening.addEventListener("keyup", (event) => {
       if (event.keyCode === 13) {
         event.preventDefault();
@@ -19,17 +65,7 @@ class Form extends Component {
         array.push(event.target.value);
         this.setState({ add_openings: array });
         event.target.value = "";
-      }
-    });
-    var inputTechstack = document.getElementById("add_techstack");
-    inputTechstack.addEventListener("keyup", (event) => {
-      if (event.keyCode === 13) {
-        event.preventDefault();
-
-        let array = this.state.add_techStack;
-        array.push(event.target.value);
-        this.setState({ add_techStack: array });
-        event.target.value = "";
+        $("#add_opening,#opening_chip_wrapper").toggle();
       }
     });
     var inputTag = document.getElementById("add_tag");
@@ -41,28 +77,54 @@ class Form extends Component {
         array.push(event.target.value);
         this.setState({ add_tag: array });
         event.target.value = "";
+        $("#add_tag,#tag_chip_wrapper").toggle();
       }
     });
   }
 
-  dialogOpen = () => {
-    this.setState({ add_tag: true });
-  };
-  dialogClose = () => {
-    this.setState({ add_tag: false });
-  };
+  renderTag(array, key) {
+    let z = [];
+    z = array.map((value, index) => {
+      return (
+        <div className="chip_wrapper">
+          <div
+            onClick={(e) => {
+              const { id } = e.target;
+              $(`#${id}`).toggleClass("chip_change");
+            }}
+            className="chip"
+            id={`${key + index}`}
+          >
+            {value}
+            <span
+              class="closebtn"
+              id={`btn_${value}`}
+              onClick={(e) => {
+                console.log(e.target.id);
+                let element = document.getElementById(e.target.id);
+                element.parentElement.style.display = "none";
+              }}
+            >
+              &times;
+            </span>
+          </div>
+        </div>
+      );
+    });
+    return z;
+  }
+
   changeBorder = (id) => {
     let style = document.getElementById(`${id}`).style;
     style.borderColor = "#2dc5a1";
     style.borderWidth = "2px";
   };
-  addTag = (element) => {};
   addTagChip() {
     let array = this.state.add_tag;
     let z = [];
     z = array.map((value) => {
       return (
-        <div class="del_chip">
+        <div class="chip_change">
           {value}
           <span
             class="closebtn"
@@ -86,7 +148,7 @@ class Form extends Component {
     let z = [];
     z = array.map((value) => {
       return (
-        <div class="del_chip">
+        <div class="chip_change">
           {value}
           <span
             class="closebtn"
@@ -109,7 +171,7 @@ class Form extends Component {
     let z = [];
     z = array.map((value) => {
       return (
-        <div className="del_chip">
+        <div className="chip_change">
           {value}
           <span
             className="closebtn"
@@ -129,95 +191,48 @@ class Form extends Component {
   }
   render() {
     return (
-      <div class="container">
-        <h2 className="text-center">Company Registration</h2>
-        <form className="form-horizontal" action="/action_page.php">
-          <div className="form-group">
-            <label className="control-label col-sm-2" for="companyName">
-              Company
-            </label>
-            <div className="col-sm-3">
-              <input
-                type="text"
-                className="form-control"
-                id="companyName"
-                placeholder="Enter Company Name"
-                name="companyName"
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="control-label col-sm-2" for="companyLogo">
-              Logo
-            </label>
-            <div className="col-sm-3">
-              <input
-                type="text"
-                className="form-control"
-                id="companyLogo"
-                placeholder="Enter Company's Logo"
-                name="companyLogo"
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="control-label col-sm-2" for="assignment">
-              No. of Assignments
-            </label>
-            <div className="col-sm-3">
-              <input
-                type="number"
-                className="form-control"
-                id="assignment"
-                placeholder="Enter the number of assignments"
-                name="assignment"
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="control-label col-sm-2" for="opening">
-              No. of opening
-            </label>
-            <div className="col-sm-3">
-              <input
-                type="number"
-                className="form-control"
-                id="opening"
-                placeholder="Enter the number of openings"
-                name="opening"
-              />
-            </div>
-            <div className="col-sm-2">
-              <button
-                className="btn btn-info"
-                onClick={(e) => e.preventDefault()}
-              >
-                Yet To be Uploaded
-              </button>
-            </div>
-          </div>
+      <div className="form_container" id="form">
+        <div class="form_input">
+          <div className="input_label">Company </div>
+          <input
+            className="input_field_container"
+            id="i_1"
+            onClick={(e) => this.changeBorder(e.target.id)}
+            placeholder="Name Of The Company"
+          />
+        </div>
+        <div className="form_input">
+          <div className="input_label">Logo </div>
+          <input
+            className="input_field_container"
+            id="i_2"
+            onClick={(e) => this.changeBorder(e.target.id)}
+            placeholder="Logo URL"
+          />
+        </div>
 
-          <div className="form-group">
-            <label className="control-label col-sm-2" for="companyDesc">
-              Company Description
-            </label>
-            <div className="col-sm-5">
-              <textarea
-                className="form-control"
-                id="companyDesc"
-                placeholder="Enter the Company Description"
-                name="companyDesc"
-                style={{ height: 150 }}
+        <div className="form_input">
+          <div className="input_label">No. Of Assignments </div>
+          <input
+            className="input_field_container"
+            id="i_3"
+            onClick={(e) => this.changeBorder(e.target.id)}
+            placeholder="No. Of assignments"
+          />
+        </div>
+        <div className="form_input">
+          <div className="input_label">No. of opening </div>
+
+          <div style={{ display: "flex" }}>
+            <div style={{ flex: 1 }}>
+              <input
+                className="input_field_container"
+                id="i_4"
+                onClick={(e) => this.changeBorder(e.target.id)}
+                placeholder="Number of openings"
               />
             </div>
-          </div>
-          {/* Tags */}
-
-          <div className="form-group">
-            <div className="col-sm-12">
-              <label className="control-label col-sm-2" for="assignment">
-                Tags
-              </label>
+            <div style={{ flex: 1 }}>
               <div className="chip_wrapper">
                 <div
                   onClick={(e) => {
@@ -225,385 +240,103 @@ class Form extends Component {
                     $(`#${id}`).toggleClass("chip_change");
                   }}
                   id="c_2"
-                  className="chip"
+                  className="schip"
                 >
-                  Artificial Intelligence
+                  Yet to be uploaded
                 </div>
-                <div
-                  onClick={(e) => {
-                    const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
-                  }}
-                  id="c_3"
-                  className="chip"
-                >
-                  Machine Learning
-                </div>
-                <div
-                  onClick={(e) => {
-                    const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
-                  }}
-                  id="c_4"
-                  className="chip"
-                >
-                  Neural Networks
-                </div>
-                <div
-                  onClick={(e) => {
-                    const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
-                  }}
-                  id="c_5"
-                  className="chip"
-                >
-                  Saas
-                </div>
-                <div
-                  onClick={(e) => {
-                    const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
-                  }}
-                  id="c_6"
-                  className="chip"
-                >
-                  Fintech
-                </div>
-                <div
-                  onClick={(e) => {
-                    const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
-                  }}
-                  id="c_7"
-                  className="chip"
-                >
-                  Deep-learning
-                </div>
-                <div
-                  onClick={(e) => {
-                    const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
-                  }}
-                  id="c_8"
-                  className="chip"
-                >
-                  Final-Services
-                </div>
-                <div style={{ display: "flex" }}>{this.addTagChip()}</div>
-                <input
-                  id="add_tag"
-                  placeholder="Add tag"
-                  className="input_chip"
-                />
               </div>
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <label className="control-label col-sm-2" for="assignment">
-                Tech Stack
-              </label>
-              <div className="chip_wrapper">
-                <div
-                  onClick={(e) => {
-                    const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
-                  }}
-                  id="c_10"
-                  className="chip"
-                >
-                  AWS
-                </div>
-                <div
-                  onClick={(e) => {
-                    const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
-                  }}
-                  id="c_11"
-                  className="chip"
-                >
-                  React
-                </div>
-                <div
-                  onClick={(e) => {
-                    const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
-                  }}
-                  id="c_12"
-                  className="chip"
-                >
-                  Python
-                </div>
-                <div style={{ display: "flex" }}>{this.addTechChip()}</div>
-                <input
-                  id="add_techstack"
-                  placeholder="Add techstack"
-                  className="input_chip"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-12">
-              <label className="control-label col-sm-2" for="assignment">
-                Openings
-              </label>
-              <div className="chip_wrapper">
-                <div
-                  onClick={(e) => {
-                    const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
-                  }}
-                  id="c_14"
-                  className="chip"
-                >
-                  Software Development Internship
-                </div>
-                <div
-                  onClick={(e) => {
-                    const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
-                  }}
-                  id="c_15"
-                  className="chip"
-                >
-                  Full-Stack Developer
-                </div>
-                <div
-                  onClick={(e) => {
-                    const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
-                  }}
-                  id="c_16"
-                  className="chip"
-                >
-                  Supply chain intern
-                </div>
-                <div style={{ display: "flex" }}>{this.addOpeningChip()}</div>
+        </div>
 
-                <input
-                  id="add_openings"
-                  placeholder="Add Openings"
-                  className="input_chip"
-                />
-              </div>
-            </div>
-          </div>
-          {/* <div className="form_container" id="form">
-          <div className="input_label">Company </div>
-          <input
-            className="input_field_container"
-            id="i_1"
-            onClick={(e) => this.changeBorder(e.target.id)}
-          />
-          <div className="input_label">Logo </div>
-          <input
-            className="input_field_container"
-            id="i_2"
-            onClick={(e) => this.changeBorder(e.target.id)}
-          />
-
-          <div className="input_label">No. Of Assignments </div>
-          <input
-            className="input_field_container_no"
-            id="i_3"
-            onClick={(e) => this.changeBorder(e.target.id)}
-          />
-          <div className="input_label">No. of opening </div>
-          <div className="chip_wrapper">
-            <div
-              className="chip"
-              id="c_1"
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-            >
-              Yet to be uploaded
-            </div>
-            <input
-              className="input_field_container_no"
-              id="i_4"
-              onClick={(e) => this.changeBorder(e.target.id)}
-            />
-          </div>
-
+        <div className="form_input">
           <div className="input_label">Tags</div>
-          <div className="chip_wrapper">
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_2"
-              className="chip"
-            >
-              Artificial Intelligence
+          <div className="chip_block">
+            {this.renderTag(this.state.tag, "tag")}
+            {this.addTagChip()}
+            <input
+              id="add_tag"
+              placeholder="Add "
+              style={{ display: "none" }}
+              className="input_field_container"
+            />
+            <div className="chip_wrapper" id="tag_chip_wrapper">
+              <div className="schip">
+                <span>Add Tags</span>
+                <span
+                  class="closebtn"
+                  onClick={(e) => {
+                    $("#add_tag,#tag_chip_wrapper").toggle();
+                  }}
+                >
+                  +
+                </span>
+              </div>
             </div>
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_3"
-              className="chip"
-            >
-              Machine Learning
-            </div>
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_4"
-              className="chip"
-            >
-              Neural Networks
-            </div>
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_5"
-              className="chip"
-            >
-              Saas
-            </div>
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_6"
-              className="chip"
-            >
-              Fintech
-            </div>
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_7"
-              className="chip"
-            >
-              Deep-learning
-            </div>
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_8"
-              className="chip"
-            >
-              Final-Services
-            </div>
-            <div style={{ display: "flex" }}>{this.addTagChip()}</div>
-            <input id="add_tag" placeholder="Add tag" className="input_chip" />
           </div>
+        </div>
+        <div className="form_input">
           <div className="input_label">Company Description</div>
           <textarea className="text_area" />
-
+        </div>
+        <div className="form_input">
           <div className="input_label">Tech Stack</div>
-          <div className="chip_wrapper">
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_10"
-              className="chip"
-            >
-              AWS
-            </div>
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_11"
-              className="chip"
-            >
-              React
-            </div>
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_12"
-              className="chip"
-            >
-              Python
-            </div>
-            <div style={{ display: "flex" }}>{this.addTechChip()}</div>
+          <div className="chip_block">
+            {this.renderTag(this.state.techStack, "tech")}
+            {this.addTechChip()}
             <input
               id="add_techstack"
-              placeholder="Add techstack"
-              className="input_chip"
+              placeholder="Add "
+              style={{ display: "none" }}
+              className="input_field_container"
             />
+            <div className="chip_wrapper" id="tech_chip_wrapper">
+              <div className="schip" id="tech_stack_chip">
+                <span id="add_techstack_label">Add Tech-Stack</span>
+                <span
+                  class="closebtn"
+                  id={"add_techstack_button"}
+                  onClick={(e) => {
+                    $("#add_techstack,#tech_chip_wrapper").toggle();
+                  }}
+                >
+                  +
+                </span>
+              </div>
+            </div>
           </div>
+        </div>
+        <div className="form_input">
           <div className="input_label">Openings</div>
-          <div className="chip_wrapper">
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_14"
-              className="chip"
-            >
-              Software Development Internship
-            </div>
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_15"
-              className="chip"
-            >
-              Full-Stack Developer
-            </div>
-            <div
-              onClick={(e) => {
-                const { id } = e.target;
-                $(`#${id}`).toggleClass("chip_change");
-              }}
-              id="c_16"
-              className="chip"
-            >
-              Supply chain intern
-            </div>
-            <div style={{ display: "flex" }}>{this.addOpeningChip()}</div>
-
+          <div className="chip_block">
+            {this.renderTag(this.state.openings, "openings")}
+            {this.addOpeningChip()}
             <input
-              id="add_openings"
-              placeholder="Add Openings"
-              className="input_chip"
+              id="add_opening"
+              placeholder="Add "
+              style={{ display: "none" }}
+              className="input_field_container"
             />
+            <div className="chip_wrapper" id="opening_chip_wrapper">
+              <div className="schip">
+                <span>Add Openings</span>
+                <span
+                  class="closebtn"
+                  onClick={(e) => {
+                    $("#add_opening,#opening_chip_wrapper").toggle();
+                  }}
+                >
+                  +
+                </span>
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div className="form_input">
           <div className="input_label"> Locations</div>
           <LocationSelect />
-        </div> */}
-          <div className="form-group">
-            <label className="control-label col-sm-2" for="assignment">
-              Location
-            </label>
-            <div className="col-sm-8">
-              <LocationSelect />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-sm-offset-2 col-sm-10">
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </div>
-          </div>
-        </form>
+        </div>
       </div>
     );
   }

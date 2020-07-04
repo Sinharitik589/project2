@@ -1,13 +1,14 @@
 input:focus,
-textarea:focus,
-select:focus {
+textarea:focus {
   outline: none;
 }
 
 .form_container {
-  padding: 3% 7% 3% 7%;
-
-  margin: 1% 10% 5% 10%;
+  border-color: black;
+  border-width: 0px 1px 0px 1px;
+  border-style: solid;
+  margin: 0% 25% 0% 25%;
+  padding: 3% 2% 3% 2%;
 
   color: white;
 
@@ -17,14 +18,21 @@ select:focus {
 }
 
 .input_field_container {
-  border-radius: 5px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #949494;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  border: 1px solid #ccc;
+  width: 100%;
+  border-radius: 4px;
+}
 
-  padding: 13px;
-  width: 60%;
-  margin: 0px 0px 15px 0px;
+.form_input {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 20px;
 }
 .input_field_container_no {
   border-radius: 5px;
@@ -38,93 +46,108 @@ select:focus {
 }
 
 .input_label {
-  font-size: large;
-  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 5px;
+  position: relative;
+  min-height: 1px;
+
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.42857143;
+  color: #333;
+  display: inline-block;
+  max-width: 100%;
   margin-bottom: 10px;
-  color: black;
-}
-
-.del_chip {
-  margin: 0px 10px 10px 10px;
-
-  white-space: nowrap;
-  color: white;
-  padding: 0 25px;
-  height: 40px;
-  font-size: 15px;
-  line-height: 50px;
-  border-radius: 20px;
-
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  background-color: #417de9;
-  color: white;
+  font-weight: 700;
 }
 
 .closebtn {
-  padding-left: 5px;
+  padding-left: 10px;
   align-content: center;
   color: black;
-  font-weight: bold;
+  font-weight: lighter;
   float: right;
   font-size: 20px;
   cursor: pointer;
 }
 
+.chip_block {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
 .chip_wrapper {
-  margin: 10px 0 20px 0;
+  margin-right: 6px;
+  margin-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
 }
 .chip {
-  background-color: #99b9f3;
-
-  margin: 0px 10px 10px 10px;
-
   white-space: nowrap;
-  color: white;
+  color: black;
+  border: 2px solid gray;
   padding: 0 25px;
-  height: 40px;
-  font-size: 15px;
-  line-height: 50px;
-  border-radius: 20px;
+  height: 30px;
+  font-size: 12px;
 
-  text-align: center;
-  justify-content: center;
+  border-radius: 14px;
+
   align-items: center;
   display: flex;
   cursor: pointer;
 }
 
-.chip_change {
-  background-color: #417de9;
-
-  margin: 0px 10px 10px 10px;
-  padding: 0 25px;
-  height: 40px;
-  font-size: 15px;
-  line-height: 50px;
-  border-radius: 20px;
+.city_chip {
   white-space: nowrap;
-  color: white;
+  color: black;
+  border: 2px solid gray;
+  font-size: 12px;
+  padding: 2px;
+  border-radius: 10px;
+  margin: 2px 3px;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+}
+.city_chip_change {
+  white-space: nowrap;
+  color: black;
+  border: 2px solid gray;
+  font-size: 12px;
+  padding: 2px;
+  border-radius: 10px;
+  margin: 2px 3px;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+  background-color: #1a73e8;
+}
 
-  text-align: center;
-  justify-content: center;
+.chip_change {
+  white-space: nowrap;
+  color: black;
+  background-color: #1a73e8;
+  border: 1px solid black;
+  padding: 0 25px;
+  height: 30px;
+  font-size: 12px;
+
+  border-radius: 14px;
+
   align-items: center;
   display: flex;
   cursor: pointer;
 }
 .schip {
-  border-radius: 3px;
-  background-color: gray;
-  padding: 5px;
-  font-size: 15px;
-  height: 25px;
   white-space: nowrap;
   color: black;
-  margin-right: 10px;
+  border: 2px solid #1a73e8;
+  padding: 0 25px;
+  height: 30px;
+  font-size: 12px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
+
   align-items: center;
   display: flex;
   cursor: pointer;
@@ -137,7 +160,7 @@ select:focus {
   border-style: solid;
   border-color: black;
   font-size: large;
-  background-color: #dfe9fb;
+
   height: 200px;
 }
 
@@ -179,18 +202,11 @@ select:focus {
   width: 30%;
 }
 .button {
-  border-radius: 5px;
-
-  padding: 10px;
-
-  width: 94%;
-  margin: 10px 0px 20px 0px;
-
-  z-index: 10px;
-  color: white;
-  background-color: #1a73e8;
-  border-width: 0;
-  text-align: center;
+  background-color: white;
+  padding: 0;
+  color: inherit;
+  border: none;
+  font-size: 20px;
 }
 
 .dialog_fields {
@@ -200,8 +216,6 @@ select:focus {
 }
 
 .continents {
-  padding: 2%;
-  margin-right: 30%;
   display: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   flex-wrap: wrap;
@@ -224,51 +238,45 @@ select:focus {
 .city {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid black;
-  padding: 12px 5px 10px 5px;
+  border-top: 1px solid black;
+
   flex-wrap: wrap;
 }
 .city_wrapper {
   display: flex;
+  position: relative;
 
   flex-wrap: wrap;
   flex: 5;
   width: 100%;
 }
-.city:nth-child(1) {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  border-top: 1px solid black;
-
-  padding: 12px 5px 10px 5px;
-}
 
 .country {
   display: flex;
   flex-direction: column;
+
   margin-bottom: 20px;
 }
 
 .continent_header {
   padding: 10px;
-  font-size: larger;
+  font-size: 12px;
   position: relative;
 }
 
 .select_country_header {
   padding: 10px;
-  font-size: larger;
+  font-size: 14px;
   position: relative;
   color: black;
-  margin-right: 30%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
 }
 
 .expand {
   position: absolute;
-  right: 0;
-  font-size: smaller;
+  right: 2px;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 .input_chip {
