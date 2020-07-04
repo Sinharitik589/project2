@@ -80,30 +80,34 @@ textarea:focus {
   margin-right: 6px;
   margin-bottom: 10px;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
 .chip {
   white-space: nowrap;
-  color: black;
-  border: 2px solid gray;
+
   padding: 0 25px;
   height: 30px;
-  font-size: 12px;
 
-  border-radius: 14px;
-
+  color: #314b7f;
+  background-color: #c8d3e9;
   align-items: center;
   display: flex;
   cursor: pointer;
+  font-size: 13px;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 3px 5px;
 }
 
 .city_chip {
   white-space: nowrap;
-  color: black;
-  border: 2px solid gray;
+  color: #314b7f;
+  background-color: #c8d3e9;
+
   font-size: 12px;
   padding: 2px;
-  border-radius: 10px;
+  border-radius: 4px;
   margin: 2px 3px;
   align-items: center;
   display: flex;
@@ -111,32 +115,42 @@ textarea:focus {
 }
 .city_chip_change {
   white-space: nowrap;
-  color: black;
-  border: 2px solid gray;
+  color: #314b7f;
+  background-color: #c8d3e9;
+
   font-size: 12px;
   padding: 2px;
-  border-radius: 10px;
+  border-radius: 4px;
   margin: 2px 3px;
   align-items: center;
   display: flex;
   cursor: pointer;
-  background-color: #1a73e8;
+}
+
+.city_chip:hover {
+  color: white;
+  background-color: #99b9f3;
+}
+.chip:hover {
+  color: white;
+  background-color: #99b9f3;
 }
 
 .chip_change {
   white-space: nowrap;
-  color: black;
-  background-color: #1a73e8;
-  border: 1px solid black;
+
   padding: 0 25px;
   height: 30px;
-  font-size: 12px;
 
-  border-radius: 14px;
-
+  color: white;
+  background-color: #314b7f;
   align-items: center;
   display: flex;
   cursor: pointer;
+  font-size: 13px;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 3px 5px;
 }
 .schip {
   white-space: nowrap;
@@ -296,7 +310,6 @@ textarea:focus {
 
 .new_chip {
   align-items: center;
-  align-self: center;
   font-size: 13px;
   font-weight: 400;
   border-radius: 4px;

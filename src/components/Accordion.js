@@ -18,16 +18,16 @@ const Accordion = (props) => {
   const renderCity = (id) => {
     let z = [];
     let array = cityData[id];
-    z = array.map((value) => {
+    z = array.map((value, index) => {
       return (
         <div
           className="city_chip"
+          id={`${value}`}
           onClick={(e) => {
-            console.log("clicked");
             const { id } = e.target;
+            console.log(id);
             $(`#${id}`).toggleClass("city_chip_change");
           }}
-          id={`${value}`}
         >
           {value}
         </div>
@@ -36,14 +36,13 @@ const Accordion = (props) => {
     z.push(
       <span style={{ position: "absolute", right: 2 }}>
         <div
+          id={`c_${id}`}
           className="city_chip"
-          style={{ borderColor: "#1a73e8" }}
           onClick={(e) => {
-            console.log("clicked");
             const { id } = e.target;
+
             $(`#${id}`).toggleClass("city_chip_change");
           }}
-          id={`${id}`}
         >
           Remote
         </div>

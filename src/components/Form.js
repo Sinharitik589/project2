@@ -108,7 +108,7 @@ class Form extends Component {
               const { id } = e.target;
               $(`#${id}`).toggleClass("chip_change");
             }}
-            className="new_chip"
+            className="chip"
             id={`${key + index}`}
           >
             {value}
@@ -208,7 +208,7 @@ class Form extends Component {
   render() {
     return (
       <div className="form_container" id="form">
-        <div class="form_input">
+        <div class="form-group">
           <div className="input_label">Company </div>
           <input
             className="input_field_container"
