@@ -1,15 +1,17 @@
 input:focus,
 textarea:focus {
   outline: none;
+  border-color: #66afe9;
+  box-shadow: 0 1px 8px 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .form_container {
-  border-color: black;
+  /*  border-color: black;
   border-width: 0px 1px 0px 1px;
-  border-style: solid;
+  border-style: solid; */
   margin: 0% 25% 0% 25%;
   padding: 3% 2% 3% 2%;
-
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   color: white;
 
   display: flex;
@@ -21,6 +23,7 @@ textarea:focus {
   height: 34px;
   padding: 6px 12px;
   font-size: 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.42857143;
   color: #555;
   border: 1px solid #ccc;
@@ -115,8 +118,8 @@ textarea:focus {
 }
 .city_chip_change {
   white-space: nowrap;
-  color: #314b7f;
-  background-color: #c8d3e9;
+  color: white;
+  background-color: #314b7f;
 
   font-size: 12px;
   padding: 2px;
@@ -136,7 +139,7 @@ textarea:focus {
   background-color: #99b9f3;
 }
 
-.chip_change {
+.new_chip_change {
   white-space: nowrap;
 
   padding: 0 25px;
@@ -152,10 +155,9 @@ textarea:focus {
   border-radius: 4px;
   padding: 3px 5px;
 }
-.schip {
+.schip_new {
+  margin-left: 10px;
   white-space: nowrap;
-  color: black;
-  border: 2px solid #1a73e8;
   padding: 0 25px;
   height: 30px;
   font-size: 12px;
@@ -178,55 +180,12 @@ textarea:focus {
   height: 200px;
 }
 
-.dialog {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4);
-}
-.dialog_hide {
-  display: none; /* Hidden by default */
-  position: absolute; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.dialog_content {
-  background-color: #fefefe;
-  margin: 200px 35% 0 35%;
-  padding: 1%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  border: 1px solid #888;
-  width: 30%;
-}
 .button {
   background-color: white;
   padding: 0;
   color: inherit;
   border: none;
   font-size: 20px;
-}
-
-.dialog_fields {
-  display: flex;
-  justify-content: center;
-  color: black;
 }
 
 .continents {
@@ -318,3 +277,10 @@ textarea:focus {
   color: #314b7f;
   background-color: #c8d3e9;
 }
+
+/* 
+if( $('#i_4').attr('disabled') ){
+  $('#i_4').removeAttr('disabled')
+} else {
+  $('#i_4').attr('disabled', true)
+} */

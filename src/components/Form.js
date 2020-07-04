@@ -44,8 +44,8 @@ class Form extends Component {
   };
 
   componentDidMount() {
-    var inputOpening = document.getElementById("add_techstack");
-    inputOpening.addEventListener("keyup", (event) => {
+    var inputTechStack = document.getElementById("add_techstack");
+    inputTechStack.addEventListener("keyup", (event) => {
       if (event.keyCode === 13) {
         event.preventDefault();
 
@@ -106,7 +106,7 @@ class Form extends Component {
           <div
             onClick={(e) => {
               const { id } = e.target;
-              $(`#${id}`).toggleClass("chip_change");
+              $(`#${id}`).toggleClass("new_chip_change");
             }}
             className="chip"
             id={`${key + index}`}
@@ -140,7 +140,7 @@ class Form extends Component {
     let z = [];
     z = array.map((value) => {
       return (
-        <div class="chip_change">
+        <div class="new_chip_change">
           {value}
           <span
             class="closebtn"
@@ -164,7 +164,7 @@ class Form extends Component {
     let z = [];
     z = array.map((value) => {
       return (
-        <div class="chip_change">
+        <div class="new_chip_change">
           {value}
           <span
             class="closebtn"
@@ -187,7 +187,7 @@ class Form extends Component {
     let z = [];
     z = array.map((value) => {
       return (
-        <div className="chip_change">
+        <div className="new_chip_change">
           {value}
           <span
             className="closebtn"
@@ -208,12 +208,11 @@ class Form extends Component {
   render() {
     return (
       <div className="form_container" id="form">
-        <div class="form-group">
+        <div class="form-input">
           <div className="input_label">Company </div>
           <input
             className="input_field_container"
             id="i_1"
-            onClick={(e) => this.changeBorder(e.target.id)}
             placeholder="Name Of The Company"
           />
         </div>
@@ -222,7 +221,6 @@ class Form extends Component {
           <input
             className="input_field_container"
             id="i_2"
-            onClick={(e) => this.changeBorder(e.target.id)}
             placeholder="Logo URL"
           />
         </div>
@@ -232,7 +230,6 @@ class Form extends Component {
           <input
             className="input_field_container"
             id="i_3"
-            onClick={(e) => this.changeBorder(e.target.id)}
             placeholder="No. Of assignments"
           />
         </div>
@@ -244,7 +241,6 @@ class Form extends Component {
               <input
                 className="input_field_container"
                 id="i_4"
-                onClick={(e) => this.changeBorder(e.target.id)}
                 placeholder="Number of openings"
               />
             </div>
@@ -253,14 +249,22 @@ class Form extends Component {
                 <div
                   onClick={(e) => {
                     const { id } = e.target;
-                    $(`#${id}`).toggleClass("chip_change");
+                    $(`#${id}`).toggleClass("new_chip_change");
+                    $(`#${id}`)
+                      .toggleClass("btn-outline-primary")
+                      .toggleClass("btn-primary");
+
+                    // Toogle Disable
+                    if ($("#i_4").attr("disabled")) {
+                      $("#i_4").removeAttr("disabled");
+                    } else {
+                      $("#i_4").attr("disabled", true);
+                    }
                   }}
                   id="c_2"
-                  className="schip"
-                  className="btn"
-                  className="btn-outline-primary"
+                  className="schip_new btn btn-outline-primary"
                 >
-                  Yet to be uploaded
+                  Yet to be Updated
                 </div>
               </div>
             </div>
@@ -279,23 +283,26 @@ class Form extends Component {
               className="input_field_container"
             />
             <div className="chip_wrapper" id="tag_chip_wrapper">
-              <div className="schip">
+              <div
+                className="schip_new btn btn-outline-primary"
+                onClick={(e) => {
+                  $("#add_tag,#tag_chip_wrapper").toggle();
+                }}
+              >
                 <span>Add Tags</span>
-                <span
-                  class="closebtn"
-                  onClick={(e) => {
-                    $("#add_tag,#tag_chip_wrapper").toggle();
-                  }}
-                >
-                  +
-                </span>
+                <span className="closebtn">+</span>
               </div>
             </div>
           </div>
         </div>
         <div className="form_input">
           <div className="input_label">Company Description</div>
-          <textarea className="text_area" />
+          <div className="chip_block">
+            <textarea
+              className="input_field_container"
+              style={{ height: 150 }}
+            />
+          </div>
         </div>
         <div className="form_input">
           <div className="input_label">Tech Stack</div>
@@ -309,15 +316,15 @@ class Form extends Component {
               className="input_field_container"
             />
             <div className="chip_wrapper" id="tech_chip_wrapper">
-              <div className="schip" id="tech_stack_chip">
+              <div
+                className="schip_new btn btn-outline-primary"
+                id="tech_stack_chip"
+                onClick={(e) => {
+                  $("#add_techstack,#tech_chip_wrapper").toggle();
+                }}
+              >
                 <span id="add_techstack_label">Add Tech-Stack</span>
-                <span
-                  class="closebtn"
-                  id={"add_techstack_button"}
-                  onClick={(e) => {
-                    $("#add_techstack,#tech_chip_wrapper").toggle();
-                  }}
-                >
+                <span class="closebtn" id={"add_techstack_button"}>
                   +
                 </span>
               </div>
@@ -336,16 +343,14 @@ class Form extends Component {
               className="input_field_container"
             />
             <div className="chip_wrapper" id="opening_chip_wrapper">
-              <div className="schip">
+              <div
+                className="schip_new btn btn-outline-primary"
+                onClick={(e) => {
+                  $("#add_opening,#opening_chip_wrapper").toggle();
+                }}
+              >
                 <span>Add Openings</span>
-                <span
-                  class="closebtn"
-                  onClick={(e) => {
-                    $("#add_opening,#opening_chip_wrapper").toggle();
-                  }}
-                >
-                  +
-                </span>
+                <span class="closebtn">+</span>
               </div>
             </div>
           </div>
