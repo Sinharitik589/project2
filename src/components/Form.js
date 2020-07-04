@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import LocationSelect from "./LocationEmployer";
 
 import $ from "jquery";
@@ -80,6 +80,22 @@ class Form extends Component {
         $("#add_tag,#tag_chip_wrapper").toggle();
       }
     });
+
+    // TO Toggle all Add buttons and input Field
+    $("#add-tag-button").click(() => {
+      $("#add-tag-button").hide();
+      $("#add_tag").show();
+    });
+
+    $("#add-techstack-button").click(() => {
+      $("#add-techstack-button").hide();
+      $("#add_techstack").show();
+    });
+
+    $("#add-openings-button").click(() => {
+      $("#add-openings-button").hide();
+      $("#add_openings").show();
+    });
   }
 
   renderTag(array, key) {
@@ -92,7 +108,7 @@ class Form extends Component {
               const { id } = e.target;
               $(`#${id}`).toggleClass("chip_change");
             }}
-            className="chip"
+            className="new_chip"
             id={`${key + index}`}
           >
             {value}
@@ -241,6 +257,8 @@ class Form extends Component {
                   }}
                   id="c_2"
                   className="schip"
+                  className="btn"
+                  className="btn-outline-primary"
                 >
                   Yet to be uploaded
                 </div>

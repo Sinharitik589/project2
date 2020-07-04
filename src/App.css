@@ -280,11 +280,28 @@ textarea:focus {
 }
 
 .input_chip {
-  height: 20px;
+  height: 35px;
   font-size: 15px;
   width: fit-content;
   border-width: thin;
   border-radius: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   padding: 10px;
+}
+
+.add-button {
+  border-radius: 20px;
+  height: 35px;
+}
+
+.new_chip {
+  align-items: center;
+  align-self: center;
+  font-size: 13px;
+  font-weight: 400;
+  border-radius: 4px;
+  padding: 3px 5px;
+  transition: 0.2s;
+  color: #314b7f;
+  background-color: #c8d3e9;
 }
