@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import LocationSelect from "./LocationEmployer";
 import Dialog from "./Dialog";
 import $ from "jquery";
