@@ -18,6 +18,9 @@ textarea:focus {
 
   flex-direction: column;
 }
+.form_containers {
+  margin: 6px;
+}
 
 .input_field_container {
   height: 34px;
@@ -233,7 +236,7 @@ textarea:focus {
 
 .continent_header {
   padding: 10px;
-  font-size: 12px;
+  font-size: 14px;
   position: relative;
 }
 

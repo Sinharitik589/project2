@@ -1,49 +1,17 @@
 import React, { Component } from "react";
 import LocationSelect from "./LocationEmployer";
-
+import data from "../countryStats.json";
 import $ from "jquery";
+import Renderchip from "./Renderchip";
 class Form extends Component {
   state = {
     add_tag: [],
     add_techStack: [],
     add_openings: [],
-    tag: [
-      "Artificial Intelligence",
-      "Machine Learning",
-      "Deep Learning",
-      "Neural Networks",
-      "Fintech",
-      "Financial Services",
-      " Saas",
-      "E-Commerce",
-      "Edtech",
-      "Software as a Service",
-      "Logistics",
-      "Healthcare",
-      "Computer Vision",
-      "Ride hailing",
-      "Transportation",
-      "Food Delivery",
-      "Big Data",
-      "Data Analytics",
-      "Developer Tools",
-      "Nonprofit",
-      "Design",
-      "Cybersecurity",
-      "Data Security",
-      "Blockchain",
-      "Agritech",
-      "Supply Chain",
-    ],
-    techStack: ["AWS", "React", "Python"],
-    openings: [
-      "Software Development Internship",
-      "Full Stack Development",
-      "Supply Chain Intern",
-    ],
   };
 
   componentDidMount() {
+    console.log(this.props);
     var inputTechStack = document.getElementById("add_techstack");
     inputTechStack.addEventListener("keyup", (event) => {
       if (event.keyCode === 13) {
@@ -81,6 +49,16 @@ class Form extends Component {
       }
     });
 
+    var locationTag = document.getElementById("add_location");
+    locationTag.addEventListener("keyup", (event) => {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+
+        alert(`location added as ${locationTag.value}`);
+        event.target.value = "";
+        $("#add_tag,#tag_chip_wrapper").toggle();
+      }
+    });
     // TO Toggle all Add buttons and input Field
     $("#add-tag-button").click(() => {
       $("#add-tag-button").hide();
@@ -98,45 +76,8 @@ class Form extends Component {
     });
   }
 
-  renderTag(array, key) {
-    let z = [];
-    z = array.map((value, index) => {
-      return (
-        <div className="chip_wrapper">
-          <div
-            onClick={(e) => {
-              const { id } = e.target;
-              $(`#${id}`).toggleClass("new_chip_change");
-            }}
-            className="chip"
-            id={`${key + index}`}
-          >
-            {value}
-            <span
-              class="closebtn"
-              id={`btn_${value}`}
-              onClick={(e) => {
-                console.log(e.target.id);
-                let element = document.getElementById(e.target.id);
-                element.parentElement.style.display = "none";
-              }}
-            >
-              &times;
-            </span>
-          </div>
-        </div>
-      );
-    });
-    return z;
-  }
-
-  changeBorder = (id) => {
-    let style = document.getElementById(`${id}`).style;
-    style.borderColor = "#2dc5a1";
-    style.borderWidth = "2px";
-  };
-  addTagChip() {
-    let array = this.state.add_tag;
+  addTagChip(chip) {
+    let array = this.state[chip];
     let z = [];
     z = array.map((value) => {
       return (
@@ -159,77 +100,27 @@ class Form extends Component {
     return z;
   }
 
-  addTechChip() {
-    let array = this.state.add_techStack;
-    let z = [];
-    z = array.map((value) => {
-      return (
-        <div class="new_chip_change">
-          {value}
-          <span
-            class="closebtn"
-            id={`btn_${value}`}
-            onClick={(e) => {
-              console.log(e.target.id);
-              let element = document.getElementById(e.target.id);
-              element.parentElement.style.display = "none";
-            }}
-          >
-            &times;
-          </span>
-        </div>
-      );
-    });
-    return z;
-  }
-  addOpeningChip() {
-    let array = this.state.add_openings;
-    let z = [];
-    z = array.map((value) => {
-      return (
-        <div className="new_chip_change">
-          {value}
-          <span
-            className="closebtn"
-            id={`btn_${value}`}
-            onClick={(e) => {
-              console.log(e.target.id);
-              let element = document.getElementById(e.target.id);
-              element.parentElement.style.display = "none";
-            }}
-          >
-            &times;
-          </span>
-        </div>
-      );
-    });
-    return z;
-  }
   render() {
+    const { tag, techStack, openings } = data.tagData;
+    console.log(tag, techStack, openings);
     return (
-      <div className="form_container" id="form">
-        <div class="form-input">
+      <div className={this.props.class} id="form">
+        <div class="form_input">
           <div className="input_label">Company </div>
           <input
             className="input_field_container"
-            id="i_1"
             placeholder="Name Of The Company"
           />
         </div>
         <div className="form_input">
           <div className="input_label">Logo </div>
-          <input
-            className="input_field_container"
-            id="i_2"
-            placeholder="Logo URL"
-          />
+          <input className="input_field_container" placeholder="Logo URL" />
         </div>
 
         <div className="form_input">
           <div className="input_label">No. Of Assignments </div>
           <input
             className="input_field_container"
-            id="i_3"
             placeholder="No. Of assignments"
           />
         </div>
@@ -274,8 +165,8 @@ class Form extends Component {
         <div className="form_input">
           <div className="input_label">Tags</div>
           <div className="chip_block">
-            {this.renderTag(this.state.tag, "tag")}
-            {this.addTagChip()}
+            <Renderchip array={tag} />
+            {this.addTagChip("add_tag")}
             <input
               id="add_tag"
               placeholder="Add "
@@ -307,8 +198,8 @@ class Form extends Component {
         <div className="form_input">
           <div className="input_label">Tech Stack</div>
           <div className="chip_block">
-            {this.renderTag(this.state.techStack, "tech")}
-            {this.addTechChip()}
+            <Renderchip array={techStack} />
+            {this.addTagChip("add_techStack")}
             <input
               id="add_techstack"
               placeholder="Add "
@@ -334,8 +225,8 @@ class Form extends Component {
         <div className="form_input">
           <div className="input_label">Openings</div>
           <div className="chip_block">
-            {this.renderTag(this.state.openings, "openings")}
-            {this.addOpeningChip()}
+            <Renderchip array={openings} />
+            {this.addTagChip("add_openings")}
             <input
               id="add_opening"
               placeholder="Add "
@@ -358,6 +249,23 @@ class Form extends Component {
 
         <div className="form_input">
           <div className="input_label"> Locations</div>
+          <div className="chip_wrapper" id="location_chip_wrapper">
+            <div
+              className="schip_new btn btn-outline-primary"
+              onClick={(e) => {
+                $("#add_location,#location_chip_wrapper").toggle();
+              }}
+            >
+              <span>Add Custom Locations</span>
+              <span class="closebtn">+</span>
+            </div>
+          </div>
+          <input
+            id="add_location"
+            placeholder="Add "
+            style={{ display: "none" }}
+            className="input_field_container"
+          />
           <LocationSelect />
         </div>
       </div>

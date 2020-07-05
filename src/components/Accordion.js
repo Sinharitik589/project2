@@ -1,77 +1,15 @@
 import React from "react";
 import $ from "jquery";
+import data from "../countryStats.json";
 
 const Accordion = (props) => {
-  console.log(props.id);
-  const countryData = {
-    Asia: [
-      "India",
-      "Pakistan",
-      "Indonesia",
-      "China",
-      "Bangladesh",
-      "Vietnam",
-      "Myanmar",
-      "Japan",
-      "Thailand",
-      "Combodia",
-    ],
-    Europe: ["Germany", "Italy", "Spain"],
-    Australia: [],
-  };
-  const cityData = {
-    India: [
-      "Mumbai",
-      "Chennai",
-      "Delhi",
-      "Bangalore",
-      "Hyderabad",
-      "Noida",
-      "Jaipur",
-      "Kolkata",
-      "Pune",
-      "Gurugram",
-      "Ahemedabad",
-    ],
-    Pakistan: ["Islamabad", "Lahore", "Karachi"],
-    Indonesia: ["Jakarta", "Bandung"],
-    China: [
-      "Beijing",
-      "Wuhan",
-      "Shanghai",
-      "Shenzhen",
-      "Tianjin",
-      "Chengdu",
-      "Chongqing",
-      "Hangzhou",
-      "Guangzhou",
-      "Nanjing",
-      "Zhengzhou",
-      "Wuhan",
-    ],
-    Bangladesh: [],
-    Vietnam: [],
-    Myanmar: [],
-    Japan: [],
-    Thailand: [],
-    Combodia: [],
-    Germany: ["Berlin", "Hamburg", "Munich", "Cologne"],
-    Italy: [
-      "Rome",
-      "Venice",
-      "Florence",
-      "Milan",
-      "Turin",
-      "Bologna",
-      "Naples",
-    ],
-    Spain: ["Barcelona"],
-  };
-
+  console.log(data.cityData["India"]);
+  const { countryData, cityData } = data;
   const renderCity = (id) => {
     let z = [];
-    console.log(id);
+
     let array = cityData[id];
+    console.log(cityData[id], id);
     z = array.map((value, index) => {
       return (
         <div

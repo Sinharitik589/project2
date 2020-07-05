@@ -1,0 +1,122 @@
+{
+  "tagData": {
+    "tag": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Deep Learning",
+      "Neural Networks",
+      "Fintech",
+      "Financial Services",
+      " Saas",
+      "E-Commerce",
+      "Edtech",
+      "Software as a Service",
+      "Logistics",
+      "Healthcare",
+      "Computer Vision",
+      "Ride hailing",
+      "Transportation",
+      "Food Delivery",
+      "Big Data",
+      "Data Analytics",
+      "Developer Tools",
+      "Nonprofit",
+      "Design",
+      "Cybersecurity",
+      "Data Security",
+      "Blockchain",
+      "Agritech",
+      "Supply Chain"
+    ],
+    "techStack": [
+      "AWS",
+      "React",
+      "Python",
+      "nginx",
+      "Java",
+      "MySQL",
+      "Django",
+      "Go",
+      "Docker",
+      "jQuery",
+      "PostgreSQL",
+      "MOngoDB",
+      "Kafka",
+      "Swift",
+      "Sentry",
+      "Graphite",
+      "Apace Spark",
+      "NodeJS",
+      "JavaScript"
+    ],
+    "openings": [
+      "Software Development Internship",
+      "Full Stack Development",
+      "Supply Chain Intern"
+    ]
+  },
+  "countryData": {
+    "Asia": [
+      "India",
+      "Pakistan",
+      "Indonesia",
+      "China",
+      "Bangladesh",
+      "Vietnam",
+      "Myanmar",
+      "Japan",
+      "Thailand",
+      "Combodia"
+    ],
+    "Europe": ["Germany", "Italy", "Spain"],
+    "Australia": []
+  },
+  "cityData": {
+    "India": [
+      "Mumbai",
+      "Chennai",
+      "Delhi",
+      "Bangalore",
+      "Hyderabad",
+      "Noida",
+      "Jaipur",
+      "Kolkata",
+      "Pune",
+      "Gurugram",
+      "Ahemedabad"
+    ],
+    "Pakistan": ["Islamabad", "Lahore", "Karachi"],
+    "Indonesia": ["Jakarta", "Bandung"],
+    "China": [
+      "Beijing",
+      "Wuhan",
+      "Shanghai",
+      "Shenzhen",
+      "Tianjin",
+      "Chengdu",
+      "Chongqing",
+      "Hangzhou",
+      "Guangzhou",
+      "Nanjing",
+      "Zhengzhou",
+      "Wuhan"
+    ],
+    "Bangladesh": [],
+    "Vietnam": [],
+    "Myanmar": [],
+    "Japan": [],
+    "Thailand": [],
+    "Combodia": [],
+    "Germany": ["Berlin", "Hamburg", "Munich", "Cologne"],
+    "Italy": [
+      "Rome",
+      "Venice",
+      "Florence",
+      "Milan",
+      "Turin",
+      "Bologna",
+      "Naples"
+    ],
+    "Spain": ["Barcelona"]
+  }
+}
