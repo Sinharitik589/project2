@@ -3,7 +3,7 @@ import $ from "jquery";
 import Accordion from "./Accordion";
 
 export default function LocationSelect() {
-  const continentData = ["Asia", "Europe", "Australia"];
+  const continentData = ["Asia", "Europe", "Australia", "Africa"];
   const renderAccordions = () => {
     let z = [];
     z = continentData.map((value) => {

@@ -56,7 +56,7 @@ class Form extends Component {
 
         alert(`location added as ${locationTag.value}`);
         event.target.value = "";
-        $("#add_tag,#tag_chip_wrapper").toggle();
+        $("#add_location,#location_chip_wrapper").toggle();
       }
     });
     // TO Toggle all Add buttons and input Field
