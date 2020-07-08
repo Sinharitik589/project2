@@ -2,12 +2,33 @@ import React, { Component } from "react";
 import LocationSelect from "./LocationEmployer";
 import data from "../countryStats.json";
 import $ from "jquery";
-import Renderchip from "./Renderchip";
+import {
+  LogoValue,
+  CompanyValue,
+  AssignmentValue,
+  OpeningnoValue,
+  DescriptionValue,
+  TagsValue,
+  TechstackValue,
+  OpeningValue,
+  LocationValue,
+} from "../actions";
+import { connect } from "react-redux";
+import Submit from "./Submit";
+
 class Form extends Component {
   state = {
+    company: "",
+    logo: "",
+    assignment: 0,
+    opening: "",
+    description: "",
     add_tag: [],
     add_techStack: [],
     add_openings: [],
+    final_add_tag: [],
+    final_add_opening: [],
+    final_add_techStack: [],
   };
 
   componentDidMount() {
@@ -20,6 +41,10 @@ class Form extends Component {
         let array = this.state.add_techStack;
         array.push(event.target.value);
         this.setState({ add_techStack: array });
+        let f_array = this.state.final_add_techStack;
+        f_array.push(event.target.value);
+        this.setState({ final_add_techStack: f_array });
+
         event.target.value = "";
         $("#add_techstack,#tech_chip_wrapper").toggle();
       }
@@ -28,10 +53,12 @@ class Form extends Component {
     inputOpening.addEventListener("keyup", (event) => {
       if (event.keyCode === 13) {
         event.preventDefault();
-
         let array = this.state.add_openings;
         array.push(event.target.value);
         this.setState({ add_openings: array });
+        let f_array = this.state.final_add_opening;
+        f_array.push(event.target.value);
+        this.setState({ final_add_opening: f_array });
         event.target.value = "";
         $("#add_opening,#opening_chip_wrapper").toggle();
       }
@@ -44,6 +71,9 @@ class Form extends Component {
         let array = this.state.add_tag;
         array.push(event.target.value);
         this.setState({ add_tag: array });
+        let f_array = this.state.final_add_tag;
+        f_array.push(event.target.value);
+        this.setState({ final_add_tag: f_array });
         event.target.value = "";
         $("#add_tag,#tag_chip_wrapper").toggle();
       }
@@ -53,9 +83,12 @@ class Form extends Component {
     locationTag.addEventListener("keyup", (event) => {
       if (event.keyCode === 13) {
         event.preventDefault();
-
+        let city = this.props.locationReducer;
+        city.push(event.target.value);
+        this.props.LocationValue(city);
         alert(`location added as ${locationTag.value}`);
         event.target.value = "";
+
         $("#add_location,#location_chip_wrapper").toggle();
       }
     });
@@ -78,6 +111,7 @@ class Form extends Component {
 
   addTagChip(chip) {
     let array = this.state[chip];
+    let f_array = this.state[`final_${chip}`];
     let z = [];
     z = array.map((value) => {
       return (
@@ -87,8 +121,17 @@ class Form extends Component {
             class="closebtn"
             id={`btn_${value}`}
             onClick={(e) => {
-              console.log(e.target.id);
               let element = document.getElementById(e.target.id);
+
+              var index = f_array.findIndex((element) => {
+                return element == value;
+              });
+              if (index != -1) {
+                f_array.splice(index, 1);
+                this.setState({ [`final_${chip}`]: f_array });
+                this.props.TagsValue(f_array);
+              }
+
               element.parentElement.style.display = "none";
             }}
           >
@@ -99,10 +142,253 @@ class Form extends Component {
     });
     return z;
   }
+  addTechstackChip(chip) {
+    let array = this.state[chip];
+    let f_array = this.state[`final_${chip}`];
+    let z = [];
+    z = array.map((value) => {
+      return (
+        <div class="new_chip_change">
+          {value}
+          <span
+            class="closebtn"
+            id={`btn_${value}`}
+            onClick={(e) => {
+              let element = document.getElementById(e.target.id);
+
+              var index = f_array.findIndex((element) => {
+                return element == value;
+              });
+              if (index != -1) {
+                f_array.splice(index, 1);
+                this.setState({ [`final_${chip}`]: f_array });
+                this.props.TechstackValue(f_array);
+              }
+
+              element.parentElement.style.display = "none";
+            }}
+          >
+            &times;
+          </span>
+        </div>
+      );
+    });
+    return z;
+  }
+  addOpeningChip(chip) {
+    let array = this.state[chip];
+    let f_array = this.state[`final_${chip}`];
+    let z = [];
+    z = array.map((value) => {
+      return (
+        <div class="new_chip_change">
+          {value}
+          <span
+            class="closebtn"
+            id={`btn_${value}`}
+            onClick={(e) => {
+              let element = document.getElementById(e.target.id);
+
+              var index = f_array.findIndex((element) => {
+                return element == value;
+              });
+              if (index != -1) {
+                f_array.splice(index, 1);
+                this.setState({ [`final_${chip}`]: f_array });
+                this.props.OpeningValue(f_array);
+              }
+
+              element.parentElement.style.display = "none";
+            }}
+          >
+            &times;
+          </span>
+        </div>
+      );
+    });
+    return z;
+  }
+  RenderTechstackchip = (array, key) => {
+    let z = [];
+    let f_array = this.state[key];
+    z = array.map((value) => {
+      let x = value.replace(/ /g, "");
+      return (
+        <div className="chip_wrapper">
+          <div
+            onClick={(e) => {
+              const { id } = e.target;
+              $(`#${id}`).toggleClass("new_chip_change");
+
+              if (e.target.className == "chip new_chip_change") {
+                f_array.push(value);
+                this.setState({ [key]: f_array });
+                this.props.TechstackValue(f_array);
+              } else {
+                var index = array.findIndex((element) => {
+                  return element == value;
+                });
+                if (index != -1) {
+                  f_array.splice(index, 1);
+                  this.setState({ [key]: f_array });
+                  this.props.TechstackValue(f_array);
+                }
+              }
+            }}
+            className="chip"
+            id={`${x}`}
+          >
+            {value}
+            <span
+              class="closebtn"
+              id={`btn_${value}`}
+              onClick={(e) => {
+                let element = document.getElementById(e.target.id);
+                var index = f_array.findIndex((element) => {
+                  return element == value;
+                });
+                if (index != -1) {
+                  f_array.splice(index, 1);
+                  this.setState({ [key]: f_array });
+                  this.props.TechstackValue(f_array);
+                }
+                element.parentElement.style.display = "none";
+              }}
+            >
+              &times;
+            </span>
+          </div>
+        </div>
+      );
+    });
+    return z;
+  };
+
+  RenderTagchip = (array, key) => {
+    let z = [];
+    let f_array = this.state[key];
+    z = array.map((value) => {
+      let x = value.replace(/ /g, "");
+      return (
+        <div className="chip_wrapper">
+          <div
+            onClick={(e) => {
+              const { id } = e.target;
+              $(`#${id}`).toggleClass("new_chip_change");
+
+              if (e.target.className == "chip new_chip_change") {
+                f_array.push(value);
+                this.setState({ [key]: f_array });
+                this.props.TagsValue(f_array);
+              } else {
+                var index = array.findIndex((element) => {
+                  return element == value;
+                });
+                if (index != -1) {
+                  f_array.splice(index, 1);
+                  this.setState({ [key]: f_array });
+                  this.props.TagsValue(f_array);
+                }
+              }
+            }}
+            className="chip"
+            id={`${x}`}
+          >
+            {value}
+            <span
+              class="closebtn"
+              id={`btn_${value}`}
+              onClick={(e) => {
+                let element = document.getElementById(e.target.id);
+                var index = f_array.findIndex((element) => {
+                  return element == value;
+                });
+                if (index != -1) {
+                  f_array.splice(index, 1);
+                  this.setState({ [key]: f_array });
+                  this.props.TagsValue(f_array);
+                }
+                element.parentElement.style.display = "none";
+              }}
+            >
+              &times;
+            </span>
+          </div>
+        </div>
+      );
+    });
+    return z;
+  };
+
+  RenderOpeningchip = (array, key) => {
+    let z = [];
+    let f_array = this.state[key];
+    z = array.map((value) => {
+      let x = value.replace(/ /g, "");
+      return (
+        <div className="chip_wrapper">
+          <div
+            onClick={(e) => {
+              const { id } = e.target;
+              $(`#${id}`).toggleClass("new_chip_change");
+
+              if (e.target.className == "chip new_chip_change") {
+                f_array.push(value);
+                this.setState({ [key]: f_array });
+                this.props.OpeningValue(f_array);
+              } else {
+                var index = array.findIndex((element) => {
+                  return element == value;
+                });
+                if (index != -1) {
+                  f_array.splice(index, 1);
+                  this.setState({ [key]: f_array });
+                  this.props.OpeningValue(f_array);
+                }
+              }
+            }}
+            className="chip"
+            id={`${x}`}
+          >
+            {value}
+            <span
+              class="closebtn"
+              id={`btn_${value}`}
+              onClick={(e) => {
+                let element = document.getElementById(e.target.id);
+                var index = f_array.findIndex((element) => {
+                  return element == value;
+                });
+                if (index != -1) {
+                  f_array.splice(index, 1);
+                  this.setState({ [key]: f_array });
+                  this.props.OpeningValue(f_array);
+                }
+                element.parentElement.style.display = "none";
+              }}
+            >
+              &times;
+            </span>
+          </div>
+        </div>
+      );
+    });
+    return z;
+  };
 
   render() {
     const { tag, techStack, openings } = data.tagData;
-    console.log(tag, techStack, openings);
+    const {
+      company,
+      logo,
+      assignment,
+      opening,
+      final_add_tag,
+      description,
+      final_add_techStack,
+      final_add_opening,
+    } = this.state;
+
     return (
       <div className={this.props.class} id="form">
         <div class="form_input">
@@ -110,11 +396,24 @@ class Form extends Component {
           <input
             className="input_field_container"
             placeholder="Name Of The Company"
+            value={this.state.company}
+            onChange={(e) => {
+              this.setState({ company: e.target.value });
+              this.props.CompanyValue(e.target.value);
+            }}
           />
         </div>
         <div className="form_input">
           <div className="input_label">Logo </div>
-          <input className="input_field_container" placeholder="Logo URL" />
+          <input
+            className="input_field_container"
+            placeholder="Logo URL"
+            value={this.state.logo}
+            onChange={(e) => {
+              this.setState({ logo: e.target.value });
+              this.props.LogoValue(e.target.value);
+            }}
+          />
         </div>
 
         <div className="form_input">
@@ -122,6 +421,11 @@ class Form extends Component {
           <input
             className="input_field_container"
             placeholder="No. Of assignments"
+            value={this.state.assignment}
+            onChange={(e) => {
+              this.setState({ assignment: e.target.value });
+              this.props.AssignmentValue(e.target.value);
+            }}
           />
         </div>
         <div className="form_input">
@@ -133,6 +437,11 @@ class Form extends Component {
                 className="input_field_container"
                 id="i_4"
                 placeholder="Number of openings"
+                value={this.state.opening}
+                onChange={(e) => {
+                  this.setState({ opening: e.target.value });
+                  this.props.OpeningnoValue(e.target.value);
+                }}
               />
             </div>
             <div style={{ flex: 1 }}>
@@ -165,7 +474,7 @@ class Form extends Component {
         <div className="form_input">
           <div className="input_label">Tags</div>
           <div className="chip_block">
-            <Renderchip array={tag} />
+            {this.RenderTagchip(tag, "final_add_tag")}
             {this.addTagChip("add_tag")}
             <input
               id="add_tag"
@@ -192,14 +501,18 @@ class Form extends Component {
             <textarea
               className="input_field_container"
               style={{ height: 150 }}
+              onChange={(e) => {
+                this.setState({ description: e.target.value });
+                this.props.DescriptionValue(e.target.value);
+              }}
             />
           </div>
         </div>
         <div className="form_input">
           <div className="input_label">Tech Stack</div>
           <div className="chip_block">
-            <Renderchip array={techStack} />
-            {this.addTagChip("add_techStack")}
+            {this.RenderTechstackchip(techStack, "final_add_techStack")}
+            {this.addTechstackChip("add_techStack")}
             <input
               id="add_techstack"
               placeholder="Add "
@@ -225,8 +538,8 @@ class Form extends Component {
         <div className="form_input">
           <div className="input_label">Openings</div>
           <div className="chip_block">
-            <Renderchip array={openings} />
-            {this.addTagChip("add_openings")}
+            {this.RenderOpeningchip(openings, "final_add_opening")}
+            {this.addOpeningChip("add_openings")}
             <input
               id="add_opening"
               placeholder="Add "
@@ -268,9 +581,22 @@ class Form extends Component {
           />
           <LocationSelect />
         </div>
+        <Submit />
       </div>
     );
   }
 }
-
-export default Form;
+const mapStateToProps = ({ locationReducer }) => {
+  return { locationReducer };
+};
+export default connect(mapStateToProps, {
+  LogoValue,
+  CompanyValue,
+  AssignmentValue,
+  OpeningnoValue,
+  DescriptionValue,
+  TagsValue,
+  TechstackValue,
+  OpeningValue,
+  LocationValue,
+})(Form);

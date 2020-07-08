@@ -1,15 +1,19 @@
-import React from "react";
+import React, { Component } from "react";
 import $ from "jquery";
 import data from "../countryStats.json";
 
-const Accordion = (props) => {
-  console.log(data.cityData["India"]);
-  const { countryData, cityData } = data;
-  const renderCity = (id) => {
+import { connect } from "react-redux";
+import { CustomLocationValue } from "../actions";
+
+class Accordion extends Component {
+  state = {
+    city: [],
+  };
+  renderCity = (country) => {
     let z = [];
 
-    let array = cityData[id];
-    console.log(cityData[id], id);
+    let array = data.cityData[country];
+    let f_array = this.state.city;
     z = array.map((value, index) => {
       return (
         <div
@@ -17,6 +21,22 @@ const Accordion = (props) => {
           onClick={(e) => {
             const { id } = e.target;
             $(`#${id}`).toggleClass("city_chip_change");
+
+            if (e.target.className == "city_chip city_chip_change") {
+              f_array.push(`${value},${country}`);
+
+              this.setState({ city: f_array });
+            } else {
+              var index = f_array.findIndex((element) => {
+                return element == `${value},${country}`;
+              });
+              if (index != -1) {
+                f_array.splice(index, 1);
+                this.setState({ city: f_array });
+              }
+            }
+
+            this.props.CustomLocationValue(f_array);
           }}
           className="city_chip"
         >
@@ -26,7 +46,7 @@ const Accordion = (props) => {
     });
     z.push(
       <div
-        id={`c_${id}`}
+        id={`c_${country}`}
         className="city_chip"
         onClick={(e) => {
           const { id } = e.target;
@@ -42,14 +62,14 @@ const Accordion = (props) => {
     );
     return z;
   };
-  const renderCountry = (id) => {
+  renderCountry = (id) => {
     let z = [];
-    let array = countryData[id];
+    let array = data.countryData[id];
     z = array.map((value) => {
       return (
         <div className="city">
           <div style={{ flex: 1, fontSize: 12, paddingLeft: 10 }}> {value}</div>
-          <div className="city_wrapper">{renderCity(value)}</div>
+          <div className="city_wrapper">{this.renderCity(value)}</div>
         </div>
       );
     });
@@ -57,39 +77,35 @@ const Accordion = (props) => {
     return z;
   };
 
-  const x = `elements_${props.id}`;
+  render() {
+    const x = `elements_${this.props.id}`;
 
-  return (
-    <div
-      className="accordion_container"
-      id={props.id}
-      /* onClick={() => {
-        
-      }} */
-    >
-      <div className="continent_header">
-        {props.id}
-        <span
-          className="expand"
-          id={`b${x}`}
-          onClick={(e) => {
-            $(`#${x}`).toggle(400);
-            var c = document.getElementById(`${e.target.id}`);
-            if (c.innerHTML === "+") {
-              c.innerHTML = "-";
-            } else {
-              c.innerHTML = "+";
-            }
-          }}
-        >
-          +
-        </span>
+    return (
+      <div className="accordion_container" id={this.props.id}>
+        <div className="continent_header">
+          {this.props.id}
+          <span
+            className="expand"
+            id={`b${x}`}
+            onClick={(e) => {
+              $(`#${x}`).toggle(400);
+              var c = document.getElementById(`${e.target.id}`);
+              if (c.innerHTML === "+") {
+                c.innerHTML = "-";
+              } else {
+                c.innerHTML = "+";
+              }
+            }}
+          >
+            +
+          </span>
+        </div>
+        <div className="accordion_elements" id={x}>
+          <div className="country">{this.renderCountry(this.props.id)}</div>
+        </div>
       </div>
-      <div className="accordion_elements" id={x}>
-        <div className="country">{renderCountry(props.id)}</div>
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default Accordion;
+export default connect(null, { CustomLocationValue })(Accordion);
