@@ -47,7 +47,7 @@ const descriptionReducer = (state = "", action) => {
 };
 const tagReducer = (state = [], action) => {
   switch (action.type) {
-    case "Tag_Value":
+    case "Tags_Value":
       return action.payload;
 
     default:

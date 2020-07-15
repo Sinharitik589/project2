@@ -496,7 +496,7 @@ class Form extends Component {
           </div>
         </div>
         <div className="form_input">
-          <div className="input_label">Company Description</div>
+          <div className="input_label">Your Company Description</div>
           <div className="chip_block">
             <textarea
               className="input_field_container"
